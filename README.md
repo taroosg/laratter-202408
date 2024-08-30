@@ -1,7 +1,12 @@
-# test
+# Laratter
 
-## chapter01
+## 機能
 
-## chapter02
+-   ユーザー登録
+-   ログイン
+
+## 工夫した点
+
+-   なんかすごい
 
 ## chapter03
