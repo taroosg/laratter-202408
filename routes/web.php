@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TweetController;
 use App\Http\Controllers\TweetLikeController;
-
+use App\Http\Controllers\CommentController;
 
 Route::get('/', function () {
   return view('welcome');
@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
   Route::post('/tweets/{tweet}/like', [TweetLikeController::class, 'store'])->name('tweets.like');
   // dislikeの処理
   Route::delete('/tweets/{tweet}/like', [TweetLikeController::class, 'destroy'])->name('tweets.dislike');
+  Route::resource('tweets.comments', CommentController::class);
 });
 
 require __DIR__ . '/auth.php';
