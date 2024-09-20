@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
   Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+  Route::get('/tweets/search', [TweetController::class, 'search'])->name('tweets.search');
   Route::resource('tweets', TweetController::class);
   // likeの処理
   Route::post('/tweets/{tweet}/like', [TweetLikeController::class, 'store'])->name('tweets.like');
