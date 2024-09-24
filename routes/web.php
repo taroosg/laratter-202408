@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TweetController;
 use App\Http\Controllers\TweetLikeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FollowController;
 
 Route::get('/', function () {
   return view('welcome');
@@ -18,6 +19,9 @@ Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
   Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+  // ユーザページの表示
+  Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+  // 検索
   Route::get('/tweets/search', [TweetController::class, 'search'])->name('tweets.search');
   Route::resource('tweets', TweetController::class);
   // likeの処理
@@ -25,6 +29,10 @@ Route::middleware('auth')->group(function () {
   // dislikeの処理
   Route::delete('/tweets/{tweet}/like', [TweetLikeController::class, 'destroy'])->name('tweets.dislike');
   Route::resource('tweets.comments', CommentController::class);
+  // フォロー
+  Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow.store');
+  // フォローやめる
+  Route::delete('/follow/{user}', [FollowController::class, 'destroy'])->name('follow.destroy');
 });
 
 require __DIR__ . '/auth.php';
